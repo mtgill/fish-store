@@ -10,6 +10,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="Home">
+        <div className="container">
           <div className="row">
             <div className="col">
               <Inventory />
@@ -20,6 +21,7 @@ class Home extends React.Component {
             <div className="col">
               <Orders />
             </div>
+        </div>
         </div>
       </div>
     );
