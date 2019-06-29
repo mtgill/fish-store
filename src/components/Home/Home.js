@@ -16,6 +16,7 @@ class Home extends React.Component {
   state = {
     orders: [],
     fishes: [],
+    fishOrder: {},
   }
 
   getOrders = () => {
@@ -39,7 +40,9 @@ class Home extends React.Component {
    }
 
    addFishToOrder = (fishId) => {
-     console.error('fish id in Home', fishId);
+     const fishOrderCopy = { ...this.state.fishOrder };
+     fishOrderCopy[fishId] = fishOrderCopy[fishId] + 1 || 1;
+     this.setState({ fishOrder: fishOrderCopy });
    }
 
    render() {
