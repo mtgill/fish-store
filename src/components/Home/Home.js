@@ -38,6 +38,10 @@ class Home extends React.Component {
        .catch(err => console.error('error with delete request', err));
    }
 
+   addFishToOrder = (fishId) => {
+     console.error('fish id in Home', fishId);
+   }
+
    render() {
      const { fishes, orders } = this.state;
      return (
@@ -45,7 +49,7 @@ class Home extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col">
-              <Inventory fishes={fishes}/>
+              <Inventory fishes={fishes} addFishToOrder={this.addFishToOrder}/>
             </div>
             <div className="col">
               <NewOrder />
