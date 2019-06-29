@@ -18,19 +18,29 @@ class Home extends React.Component {
     fishes: [],
   }
 
-  componentDidMount() {
-    fishData.getFishes()
-      .then(fishes => this.setState({ fishes }))
-      .catch(err => console.error('could not get fishes', err));
-
+  getOrders = () => {
     ordersData.getMyOrders(firebase.auth().currentUser.uid)
       .then(orders => this.setState({ orders }))
       .catch(err => console.error('cant get orders', err));
   }
 
-  render() {
-    const { fishes, orders } = this.state;
-    return (
+  componentDidMount() {
+    fishData.getFishes()
+      .then(fishes => this.setState({ fishes }))
+      .catch(err => console.error('could not get fishes', err));
+
+    this.getOrders();
+  }
+
+   deleteOrder = (orderId) => {
+     ordersData.deleteOrder(orderId)
+       .then(() => this.getOrders())
+       .catch(err => console.error('error with delete request', err));
+   }
+
+   render() {
+     const { fishes, orders } = this.state;
+     return (
       <div className="Home">
         <div className="container">
           <div className="row">
@@ -41,13 +51,13 @@ class Home extends React.Component {
               <NewOrder />
             </div>
             <div className="col">
-              <Orders orders={orders}/>
+              <Orders orders={orders} deleteOrder={this.deleteOrder}/>
             </div>
         </div>
         </div>
       </div>
-    );
-  }
+     );
+   }
 }
 
 export default Home;
