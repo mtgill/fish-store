@@ -79,11 +79,12 @@ class Home extends React.Component {
          this.getOrders();
        })
        .catch(err => console.error('unable to update', err));
-     console.error(updateOrder);
+     console.error('hello from update order', updateOrder);
    }
 
    saveNewOrder = (orderName) => {
      if (Object.keys(this.state.orderEditing).length > 0) {
+       console.error('order editing length', Object.keys(this.state.orderEditing).length);
        this.updateExisting(orderName);
      } else {
        this.makeNew(orderName);
